@@ -3,7 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import react from '@vitejs/plugin-react-swc'
+import react from 'eslint-plugin-react'
 
 export default tseslint.config(
   { ignores: ['dist'] },
