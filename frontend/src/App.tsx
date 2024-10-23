@@ -1,9 +1,11 @@
-import './App.css'
+import { PlayerControls } from "./features/player-controls/player-controls"
 
 function App() {
   return (
     <>
-      <div>Hello from GlideWave</div>
+      <div className="bg-sky-700 h-screen w-screen">
+        <PlayerControls />
+      </div>
     </>
   )
 }
