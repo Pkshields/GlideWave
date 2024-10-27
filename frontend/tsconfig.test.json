@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "types": ["vitest", "@testing-library/react"],
+  },
+  "extends": "./tsconfig.app.json",
+  "include": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
+  "exclude": []
+}
