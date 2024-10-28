@@ -21,6 +21,7 @@ export function VolumeSlider() {
             {repeat(
                 index => (
                     <div
+                        data-testid={`volume-notch-${index}`}
                         onMouseEnter={() => setHoverOverNotch(index + 1)}
                         onMouseLeave={() => setHoverOverNotch(-1)}
                         onClick={() => setVolume(index + 1)}

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["vitest", "@testing-library/react"],
+    "types": ["vitest", "@testing-library/react", "@testing-library/user-event"],
   },
   "extends": "./tsconfig.app.json",
   "include": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],

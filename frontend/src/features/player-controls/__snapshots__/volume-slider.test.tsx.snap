@@ -1,0 +1,317 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`volume slider ui tests > should show current volume level after volume is changed 1`] = `
+<div>
+  <div
+    class="flex space-x-0 items-center"
+  >
+    <div
+      data-testid="volume-notch-0"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-1"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-2"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-3"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-4"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-5"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-6"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-7"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-8"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-9"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`volume slider ui tests > should show current volume when notch is unhighlighted 1`] = `
+<div>
+  <div
+    class="flex space-x-0 items-center"
+  >
+    <div
+      data-testid="volume-notch-0"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-1"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-2"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-3"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-4"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-5"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-6"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-7"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-8"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-9"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`volume slider ui tests > should show potential volume if notch is highlighted 1`] = `
+<div>
+  <div
+    class="flex space-x-0 items-center"
+  >
+    <div
+      data-testid="volume-notch-0"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-1"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-2"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-3"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-4"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-5"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-6"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-7"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-8"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-9"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`volume slider ui tests > should start with all notches highlighted 1`] = `
+<div>
+  <div
+    class="flex space-x-0 items-center"
+  >
+    <div
+      data-testid="volume-notch-0"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-1"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-2"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-3"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-4"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-5"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-6"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-7"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-8"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+    <div
+      data-testid="volume-notch-9"
+    >
+      <div
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+      />
+    </div>
+  </div>
+</div>
+`;
