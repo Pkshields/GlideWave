@@ -31,3 +31,11 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ${{ env.WORKING_DIRECTORY }}/dist --project-name=glidewave
