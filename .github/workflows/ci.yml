@@ -1,8 +1,8 @@
-name: Build, Lint & Test Frontend
+name: Build, Lint, Test & Deploy Frontend
 on: [push]
 
 jobs:
-  build-and-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
     env:
       WORKING_DIRECTORY: ./frontend
