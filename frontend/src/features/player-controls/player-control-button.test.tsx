@@ -7,7 +7,7 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons"
 describe("player control button", () => {
     afterEach(cleanup)
 
-    it("should not call play clicked without any interaction", async () => {
+    it("should not call play clicked without any interaction", () => {
         const onClickFunction = vi.fn()
         render(<PlayerControlButton icon={faHouse} iconOnHover={faHouse} onClick={onClickFunction} />)
 

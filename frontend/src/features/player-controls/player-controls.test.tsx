@@ -17,7 +17,7 @@ describe("player controls", () => {
 
     it("should call play clicked when the play button is clicked", async () => {
         const playFunction = vi.fn()
-        render(<PlayerControls onPlayClicked={playFunction} />)
+        render(<PlayerControls isPlaying={true} onPlayStopClicked={playFunction} />)
 
         await userEvent.click(screen.getAllByTestId("player-control-button")[1])
 
