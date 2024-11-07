@@ -1,17 +1,18 @@
 import { IconProp, SizeProp } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-interface PlayerControlButtonProps {
+export interface PlayerControlButtonProps {
     icon: IconProp,
     iconOnHover: IconProp
     size?: SizeProp
+    onClick: () => void
 }
 
-export function PlayerControlButton({ icon, iconOnHover, size }: PlayerControlButtonProps) {
+export function PlayerControlButton({ icon, iconOnHover, size, onClick }: PlayerControlButtonProps) {
     return (
-        <div className="group flex items-center cursor-pointer">
+        <button className="group flex items-center cursor-pointer" onClick={onClick}>
             <FontAwesomeIcon icon={icon} size={size} className="group-hover:hidden"/>
             <FontAwesomeIcon icon={iconOnHover} size={size} className="hidden group-hover:block" />
-        </div>
+        </button>
     )
 }

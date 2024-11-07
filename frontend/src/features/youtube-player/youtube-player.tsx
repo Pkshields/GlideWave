@@ -11,7 +11,6 @@ export function YouTubePlayer({ url, isPlaying }: YouTubePlayerProps) {
 
     useEffect(() => {
         if (isPlaying) {
-            console.log(playerRef.current)
             const liveVideoDuration = playerRef.current?.getDuration() ?? 0
             playerRef.current?.seekTo(liveVideoDuration, 'seconds')
         }

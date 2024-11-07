@@ -8,8 +8,7 @@ function App() {
     return (
         <>
             <div className="bg-sky-700 h-screen w-screen">
-                <PlayerControls />
-                <button onClick={() => setIsPlaying(!isPlaying)}>Play</button>
+                <PlayerControls onPlayClicked={() => setIsPlaying(!isPlaying)} />
                 <YouTubePlayer url="https://www.youtube.com/watch?v=7NOSDKb0HlU" isPlaying={isPlaying} />
             </div>
         </>
