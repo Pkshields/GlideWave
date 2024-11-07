@@ -1,7 +1,7 @@
-import { faCirclePlay as faCirclePlayRegular, faFolder as faFolderRegular } from "@fortawesome/free-regular-svg-icons";
-import { faCirclePlay as faCirclePlaySolid, faFolder as faFolderSolid } from "@fortawesome/free-solid-svg-icons";
-import { PlayerControlButton } from "./player-control-button";
-import { VolumeSlider } from "./volume-slider";
+import { faCirclePlay as faCirclePlayRegular, faFolder as faFolderRegular } from "@fortawesome/free-regular-svg-icons"
+import { faCirclePlay as faCirclePlaySolid, faFolder as faFolderSolid } from "@fortawesome/free-solid-svg-icons"
+import { PlayerControlButton } from "./player-control-button"
+import { VolumeSlider } from "./volume-slider"
 
 export function PlayerControls() {
     return (

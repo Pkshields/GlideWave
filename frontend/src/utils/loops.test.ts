@@ -1,5 +1,5 @@
-import { describe, expect, it, test } from "vitest";
-import { repeat } from "./loops";
+import { describe, expect, it, test } from "vitest"
+import { repeat } from "./loops"
 
 describe('repeat', () => {
     test.each([1, 3, 5, 10])(

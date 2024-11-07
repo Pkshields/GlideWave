@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { repeat } from "../../utils/loops";
+import { useState } from "react"
+import { repeat } from "../../utils/loops"
 
 export function VolumeSlider() {
     const [volume, setVolume] = useState(10)
     const [hoverOverNotch, setHoverOverNotch] = useState(-1)
 
-    const generateSliderNotchClasses = (index: number): string => {
+    function generateSliderNotchClasses(index: number): string {
         const styleClassNames = "py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
 
         const effectiveVolume = hoverOverNotch == -1 ? volume : hoverOverNotch
