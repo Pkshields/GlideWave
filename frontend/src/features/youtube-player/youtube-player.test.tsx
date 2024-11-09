@@ -2,6 +2,7 @@ import { cleanup, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { YouTubePlayer } from "./youtube-player"
 import { mockGetDuration, mockSeekTo } from "../../../__mocks__/react-player"
+import { DIV_ROLE } from "../../test/element-roles"
 
 vi.mock('react-player')
 
@@ -30,7 +31,7 @@ describe("youtube player", () => {
         render(<YouTubePlayer url={url} isPlaying={true} />)
 
         await waitFor(() => {
-            expect(screen.getByRole('generic')).toBeInTheDocument()
+            expect(screen.getByRole(DIV_ROLE)).toBeInTheDocument()
         })
 
         expect(mockSeekTo).toHaveBeenCalledOnce()

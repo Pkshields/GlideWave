@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import userEvent from "@testing-library/user-event"
 import { PlayerControlButton } from "./player-control-button"
 import { faHouse } from "@fortawesome/free-solid-svg-icons"
+import { BUTTON_ROLE } from "../../test/element-roles"
 
 describe("player control button", () => {
     afterEach(cleanup)
@@ -18,7 +19,7 @@ describe("player control button", () => {
         const onClickFunction = vi.fn()
         render(<PlayerControlButton icon={faHouse} iconOnHover={faHouse} onClick={onClickFunction} />)
 
-        await userEvent.click(screen.getByRole("button"))
+        await userEvent.click(screen.getByRole(BUTTON_ROLE))
 
         expect(onClickFunction).toHaveBeenCalledOnce()
     })
