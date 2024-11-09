@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+		{
+			"name": "Debug App In Firefox",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://localhost:5173/",
+			"webRoot": "${workspaceFolder}/frontend",
+            "pathMappings": [
+                {
+                    "url": "http://localhost:5173",
+                    "path": "${workspaceFolder}/frontend"
+                }
+            ]
+        },
+        {
+            "name": "Debug Current Test File",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/frontend",
+            "program": "./node_modules/vitest/vitest.mjs",
+            "args": ["run", "../${relativeFile}"],
+            "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+            "autoAttachChildProcesses": true,
+            "smartStep": true,
+            "console": "integratedTerminal"
+        }
+    ]
+}
