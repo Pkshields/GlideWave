@@ -1,8 +1,8 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { YouTubePlayer } from "./youtube-player"
-import { mockGetDuration, mockSeekTo } from "../../../__mocks__/react-player"
-import { DIV_ROLE } from "../../test/element-roles"
+import { mockGetDuration, mockSeekTo } from "../../../../../__mocks__/react-player"
+import { DIV_ROLE } from "../../../../test/element-roles"
 
 vi.mock('react-player')
 

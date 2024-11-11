@@ -2,7 +2,7 @@ import { IconProp, SizeProp } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export interface PlayerControlButtonProps {
-    icon: IconProp,
+    icon: IconProp
     iconOnHover: IconProp
     size?: SizeProp
     onClick: () => void

@@ -3,6 +3,9 @@ import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
 import { PlayerControls } from "./player-controls"
 import userEvent from "@testing-library/user-event"
 import { PlayerControlButtonProps } from "./player-control-button"
+import { usePlayerIsPlayingStore } from "../../stores/player-state"
+
+vi.mock("../../stores/player-state")
 
 describe("player controls", () => {
     beforeAll(() => {
@@ -16,11 +19,15 @@ describe("player controls", () => {
     afterEach(cleanup)
 
     it("should call play clicked when the play button is clicked", async () => {
-        const playFunction = vi.fn()
-        render(<PlayerControls isPlaying={true} onPlayStopClicked={playFunction} />)
+        const toggleIsPlayingFunction = vi.fn()
+        vi.mocked(usePlayerIsPlayingStore).mockReturnValue({
+            isPlaying: false,
+            toggleIsPlaying: toggleIsPlayingFunction
+        })
+        render(<PlayerControls />)
 
         await userEvent.click(screen.getAllByTestId("player-control-button")[1])
 
-        expect(playFunction).toHaveBeenCalledOnce()
+        expect(toggleIsPlayingFunction).toHaveBeenCalledOnce()
     })
 })

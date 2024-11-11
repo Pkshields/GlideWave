@@ -5,7 +5,7 @@ export interface AudioStreamPlayerProps {
     isPlaying: boolean
 }
 
-export function AudioStreamPlayer({ url, isPlaying}: AudioStreamPlayerProps) {
+export function AudioStreamPlayer({ url, isPlaying }: AudioStreamPlayerProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
 
     const play = useCallback(async () => {
