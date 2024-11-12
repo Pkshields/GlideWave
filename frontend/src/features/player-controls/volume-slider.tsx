@@ -5,7 +5,7 @@ export function VolumeSlider() {
     const [volume, setVolume] = useState(10)
     const [hoverOverNotch, setHoverOverNotch] = useState(-1)
 
-    function generateSliderNotchClasses(index: number): string {
+    function generateSliderNotchStyleClasses(index: number): string {
         const styleClassNames = "py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
 
         const effectiveVolume = hoverOverNotch == -1 ? volume : hoverOverNotch
@@ -21,13 +21,14 @@ export function VolumeSlider() {
             {repeat(
                 index => (
                     <div
+                        key={index}
                         data-testid={`volume-notch-${index}`}
                         className="cursor-pointer"
                         onMouseEnter={() => setHoverOverNotch(index + 1)}
                         onMouseLeave={() => setHoverOverNotch(-1)}
                         onClick={() => setVolume(index + 1)}
                     >
-                        <div className={generateSliderNotchClasses(index)} />
+                        <div className={generateSliderNotchStyleClasses(index)} />
                     </div>
                 ),
                 10
