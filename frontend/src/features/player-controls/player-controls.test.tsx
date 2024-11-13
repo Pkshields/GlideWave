@@ -1,21 +1,13 @@
 import { cleanup, render, screen } from "@testing-library/react"
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { PlayerControls } from "./player-controls"
 import userEvent from "@testing-library/user-event"
-import { PlayerControlButtonProps } from "./player-control-button"
 import { usePlayerIsPlayingStore } from "../../stores/player-state"
 
 vi.mock("../../stores/player-state")
+vi.mock("../../components/hoverable-button/hoverable-button")
 
 describe("player controls", () => {
-    beforeAll(() => {
-        vi.mock("./player-control-button", () => ({
-            PlayerControlButton: ({ onClick }: PlayerControlButtonProps) => (
-              <button data-testid="player-control-button" onClick={onClick}>Mocked Button</button>
-            )
-        }))
-    })
-
     afterEach(cleanup)
 
     it("should call play clicked when the play button is clicked", async () => {

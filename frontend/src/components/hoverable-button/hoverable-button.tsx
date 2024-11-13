@@ -8,7 +8,7 @@ export interface PlayerControlButtonProps {
     onClick: () => void
 }
 
-export function PlayerControlButton({ icon, iconOnHover, size, onClick }: PlayerControlButtonProps) {
+export function HoverableButton({ icon, iconOnHover, size, onClick }: PlayerControlButtonProps) {
     return (
         <button className="group flex items-center cursor-pointer" onClick={onClick}>
             <FontAwesomeIcon icon={icon} size={size} className="group-hover:hidden"/>

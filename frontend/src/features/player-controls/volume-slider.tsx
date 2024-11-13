@@ -18,8 +18,8 @@ export function VolumeSlider() {
 
     return (
         <div className="flex space-x-0 items-center">
-            {repeat(
-                index => (
+            {
+                repeat(index => (
                     <div
                         key={index}
                         data-testid={`volume-notch-${index}`}
@@ -30,9 +30,8 @@ export function VolumeSlider() {
                     >
                         <div className={generateSliderNotchStyleClasses(index)} />
                     </div>
-                ),
-                10
-            )}
+                ), 10)
+            }
         </div>
     )
 }
