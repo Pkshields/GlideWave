@@ -1,0 +1,32 @@
+[
+    {
+        "name": "ChillHop",
+        "streamer": "FluxFM",
+        "sourceHomepage": "https://www.fluxfm.de/chillhop",
+        "streamUrl": "https://stream.rcast.net/m3u/242097"
+    },
+    {
+        "name": "Chillsky Beats",
+        "streamer": "Chillsky",
+        "sourceHomepage": "https://chillsky.com/",
+        "streamUrl": "https://stream.rcast.net/m3u/232010"
+    },
+    {
+        "name": "Video Game Music Radio",
+        "streamer": "Rainwave",
+        "sourceHomepage": "https://rainwave.cc/game/",
+        "streamUrl": "http://allrelays.rainwave.cc/game.mp3"
+    },
+    {
+        "name": "I Love Chillhop",
+        "streamer": "I Love Radio",
+        "sourceHomepage": "https://ilovemusic.de/ilovechillhop/",
+        "streamUrl": "http://stream01.iloveradio.de/iloveradio17.mp3"
+    },
+    {
+        "name": "#lofi",
+        "streamer": "reyfm.de",
+        "sourceHomepage": "https://www.fluxfm.de/chillhop",
+        "streamUrl": "https://listen.reyfm.de/lofi_320kbps.mp3"
+    }
+]
