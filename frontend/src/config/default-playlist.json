@@ -15,13 +15,13 @@
         "name": "Video Game Music Radio",
         "streamer": "Rainwave",
         "sourceHomepage": "https://rainwave.cc/game/",
-        "streamUrl": "http://allrelays.rainwave.cc/game.mp3"
+        "streamUrl": "https://relay.rainwave.cc:443/game.ogg"
     },
     {
         "name": "I Love Chillhop",
         "streamer": "I Love Radio",
         "sourceHomepage": "https://ilovemusic.de/ilovechillhop/",
-        "streamUrl": "http://stream01.iloveradio.de/iloveradio17.mp3"
+        "streamUrl": "https://stream01.iloveradio.de/iloveradio17.mp3"
     },
     {
         "name": "#lofi",
