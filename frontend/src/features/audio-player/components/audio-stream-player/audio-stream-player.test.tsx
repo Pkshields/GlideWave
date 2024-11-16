@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it } from "vitest"
 import { AudioStreamPlayer } from "./audio-stream-player"
-import { mockAudioElementFunctions } from "../../../../test/mock-audio-element"
+import { mockAudioElementFunctions } from "../../../../test/mocks/mock-audio-element"
 
 describe("audio stream player", () => {
     const url = "https://www.videosite.com/"
