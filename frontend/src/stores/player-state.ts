@@ -1,20 +1,24 @@
 import { create } from "zustand"
+import { StreamSource } from "../types/stream-source"
 
-interface PlayerUrlState {
-    url: string
-    setUrl: (url: string) => void
+interface PlayerSourceState {
+    source: StreamSource
+    setPlayerSource: (source: StreamSource) => void
 }
+export const usePlayerSourceStore = create<PlayerSourceState>((set) => ({
+    source: {
+        name: "SELECT A SOURCE",
+        streamer: "PLEASE",
+        sourceHomepage: "https://paulshields.dev",
+        streamUrl: "rtsp://localhost:8080"
+    },
+    setPlayerSource: (source: StreamSource) => set(() => ({ source }))
+}))
 
 interface PlayerIsPlayingState {
     isPlaying: boolean
     toggleIsPlaying: () => void
 }
-
-export const usePlayerUrlStore = create<PlayerUrlState>((set) => ({
-    // url: "https://relay.rainwave.cc:443/game.ogg",
-    url: "https://www.youtube.com/watch?v=7NOSDKb0HlU",
-    setUrl: (url: string) => set(() => ({ url }))
-}))
 
 export const usePlayerIsPlayingStore = create<PlayerIsPlayingState>((set) => ({
     isPlaying: false,

@@ -1,16 +1,22 @@
 import { describe, expect, it } from "vitest"
-import { usePlayerIsPlayingStore, usePlayerUrlStore } from "./player-state"
+import { usePlayerIsPlayingStore, usePlayerSourceStore } from "./player-state"
 import { renderHook } from "@testing-library/react"
+import { StreamSource } from "../types/stream-source"
 
 describe("player url store", () => {
     it("should set url in store", () => {
-        const expectedUrl = "https://paulshields.dev"
-        const { result: playerUrlHook, rerender } = renderHook(() => usePlayerUrlStore())
+        const expectedSource: StreamSource = {
+            name: "Stream Source",
+            streamer: "Streamer",
+            sourceHomepage: "https://home.page",
+            streamUrl: "https://home.page/stream.ogg"
+        }
+        const { result: playerUrlHook, rerender } = renderHook(() => usePlayerSourceStore())
 
-        playerUrlHook.current.setUrl(expectedUrl)
+        playerUrlHook.current.setPlayerSource(expectedSource)
         rerender()
 
-        expect(playerUrlHook.current.url).toBe(expectedUrl)
+        expect(playerUrlHook.current.source).toBe(expectedSource)
     })
 })
 
