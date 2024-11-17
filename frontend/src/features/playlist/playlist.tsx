@@ -4,13 +4,13 @@ import { HoverableButton } from "../../components/hoverable-button/hoverable-but
 import { useState } from "react"
 import { StreamSource } from "../../types/stream-source"
 import untypedDefaultPlaylist from "../../config/default-playlist.json"
-import { usePlayerSourceStore } from "../../stores/player-state"
+import { useSetPlayerSource } from "../../stores/player-state"
 import { PlaylistListItem } from "./playlist-list-item"
 
 const defaultPlaylist: StreamSource[] = untypedDefaultPlaylist
 
 export function Playlist() {
-    const { setPlayerSource } = usePlayerSourceStore()
+    const setPlayerSource = useSetPlayerSource()
     const [playlistIsHidden, setPlaylistIsHidden] = useState(true)
 
     function togglePlaylist() {

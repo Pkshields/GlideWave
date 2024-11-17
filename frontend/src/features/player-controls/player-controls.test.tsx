@@ -2,21 +2,25 @@ import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { PlayerControls } from "./player-controls"
 import userEvent from "@testing-library/user-event"
-import { usePlayerIsPlayingStore, usePlayerSourceStore } from "../../stores/player-state"
+import { usePlayerInfoStore } from "../../stores/player-state"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
 import { BUTTON_ROLE } from "../../test/element-roles"
 
 vi.mock("../../components/hoverable-button/hoverable-button")
+vi.mock("../../stores/player-state")
 
-function setPlayerSourceStore(name: string, streamer: string) {
-    usePlayerSourceStore.setState({
+function setPlayerSourceStore(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
+    vi.mocked(usePlayerInfoStore).mockReturnValue({
         source: {
             name: name,
             streamer: streamer,
             sourceHomepage: "",
             streamUrl: ""
-        }
+        },
+        isPlaying: false,
+        setPlayerSource: vi.fn(),
+        toggleIsPlaying: toggleIsPlaying
     })
 }
 
@@ -47,7 +51,7 @@ describe("player controls", () => {
 
     it("should call play clicked when the play button is clicked", async () => {
         const toggleIsPlayingFunction = vi.fn()
-        usePlayerIsPlayingStore.setState({ toggleIsPlaying: toggleIsPlayingFunction })
+        setPlayerSourceStore("", "", toggleIsPlayingFunction)
 
         render(<PlayerControls />)
         await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: "onClick" })[1])

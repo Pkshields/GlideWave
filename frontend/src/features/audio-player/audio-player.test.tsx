@@ -4,19 +4,21 @@ import { AudioPlayer } from "./audio-player"
 import { YouTubePlayer } from "./components/youtube-player/youtube-player"
 import { AudioStreamPlayer } from "./components/audio-stream-player/audio-stream-player"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
-import { usePlayerSourceStore } from "../../stores/player-state"
+import { usePlayerInfo } from "../../stores/player-state"
 
 vi.mock("./components/youtube-player/youtube-player")
 vi.mock("./components/audio-stream-player/audio-stream-player")
+vi.mock("../../stores/player-state")
 
 function setSourceStoreToReturn(streamUrl: string) {
-    usePlayerSourceStore.setState({
+    vi.mocked(usePlayerInfo).mockReturnValue({
         source: {
             name: "",
             streamer: "",
             sourceHomepage: "",
             streamUrl: streamUrl
-        }
+        },
+        isPlaying: false
     })
 }
 

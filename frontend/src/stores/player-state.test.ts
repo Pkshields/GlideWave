@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { usePlayerIsPlayingStore, usePlayerSourceStore } from "./player-state"
+import { usePlayerInfoStore } from "./player-state"
 import { renderHook } from "@testing-library/react"
 import { StreamSource } from "../types/stream-source"
 
-describe("player url store", () => {
+describe("player info store", () => {
     it("should set url in store", () => {
         const expectedSource: StreamSource = {
             name: "Stream Source",
@@ -11,23 +11,21 @@ describe("player url store", () => {
             sourceHomepage: "https://home.page",
             streamUrl: "https://home.page/stream.ogg"
         }
-        const { result: playerUrlHook, rerender } = renderHook(() => usePlayerSourceStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerInfoStore())
 
-        playerUrlHook.current.setPlayerSource(expectedSource)
+        playerInfoHook.current.setPlayerSource(expectedSource)
         rerender()
 
-        expect(playerUrlHook.current.source).toBe(expectedSource)
+        expect(playerInfoHook.current.source).toBe(expectedSource)
     })
-})
 
-describe("player is playing store", () => {
     it("should toggle is playing state", () => {
-        const { result: isPlayingHook, rerender } = renderHook(() => usePlayerIsPlayingStore())
-        const initialIsPlaying = isPlayingHook.current.isPlaying
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerInfoStore())
+        const initialIsPlaying = playerInfoHook.current.isPlaying
 
-        isPlayingHook.current.toggleIsPlaying()
+        playerInfoHook.current.toggleIsPlaying()
         rerender()
 
-        expect(isPlayingHook.current.isPlaying).toBe(!initialIsPlaying)
+        expect(playerInfoHook.current.isPlaying).toBe(!initialIsPlaying)
     })
 })
