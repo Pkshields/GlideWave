@@ -8,9 +8,10 @@ import { HoverableButton } from "../../components/hoverable-button/hoverable-but
 import { BUTTON_ROLE } from "../../test/element-roles"
 
 vi.mock("../../components/hoverable-button/hoverable-button")
+vi.mock("../playlist/playlist")
 vi.mock("../../stores/player-state")
 
-function setPlayerSourceStore(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
+function setPlayerInfoStore(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
     vi.mocked(usePlayerInfoStore).mockReturnValue({
         source: {
             name: name,
@@ -33,7 +34,7 @@ describe("player controls", () => {
 
     it("should display the name of the stream source loaded into the player", () => {
         const name = "Chillhop"
-        setPlayerSourceStore(name, "")
+        setPlayerInfoStore(name, "")
 
         render(<PlayerControls />)
 
@@ -42,7 +43,7 @@ describe("player controls", () => {
 
     it("should display the streamer of the stream source loaded into the player", () => {
         const streamer = "Big Mike"
-        setPlayerSourceStore("", streamer)
+        setPlayerInfoStore("", streamer)
 
         render(<PlayerControls />)
 
@@ -51,10 +52,10 @@ describe("player controls", () => {
 
     it("should call play clicked when the play button is clicked", async () => {
         const toggleIsPlayingFunction = vi.fn()
-        setPlayerSourceStore("", "", toggleIsPlayingFunction)
+        setPlayerInfoStore("", "", toggleIsPlayingFunction)
 
         render(<PlayerControls />)
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: /HoverableButton/ })[1])
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
 
         expect(toggleIsPlayingFunction).toHaveBeenCalledOnce()
     })

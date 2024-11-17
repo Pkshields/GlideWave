@@ -3,12 +3,12 @@ import { faFolder as faFolderSolid } from "@fortawesome/free-solid-svg-icons"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
 import { useState } from "react"
 import { StreamSource } from "../../types/stream-source"
-import { useSetPlayerSource } from "../../stores/player-state"
+import { usePlayerSourceStore } from "../../stores/player-state"
 import { PlaylistListItem } from "./playlist-list-item"
 import { DEFAULT_PLAYLIST } from "../../config/constants"
 
 export function Playlist() {
-    const setPlayerSource = useSetPlayerSource()
+    const { source, setPlayerSource } = usePlayerSourceStore()
     const [playlistIsHidden, setPlaylistIsHidden] = useState(true)
 
     function togglePlaylist() {
@@ -37,6 +37,7 @@ export function Playlist() {
                         <PlaylistListItem
                             key={`playlist-list-item-${index}`}
                             source={element}
+                            isPlaying={element === source}
                             onClick={streamSelected}
                         />
                     ))}

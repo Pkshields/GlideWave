@@ -24,6 +24,11 @@ export function usePlayerInfoStore() {
     return useGlidewaveStore()
 }
 
-export function useSetPlayerSource() {
-    return useGlidewaveStore((state) => state.setPlayerSource)
+export function usePlayerSourceStore() {
+    return useGlidewaveStore(
+        useShallow((state) => ({
+            source: state.source,
+            setPlayerSource: state.setPlayerSource,
+        }))
+    )
 }

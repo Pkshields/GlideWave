@@ -10,7 +10,7 @@ vi.mock("./components/youtube-player/youtube-player")
 vi.mock("./components/audio-stream-player/audio-stream-player")
 vi.mock("../../stores/player-state")
 
-function setSourceStoreToReturn(streamUrl: string) {
+function setPlayerInfoStore(streamUrl: string) {
     vi.mocked(usePlayerInfo).mockReturnValue({
         source: {
             name: "",
@@ -31,7 +31,7 @@ describe("audio player", () => {
     afterEach(cleanup)
 
     it("should start youtube player if youtube url is provided", () => {
-        setSourceStoreToReturn("https://www.youtube.com/watch?v=5yx6BWlEVcY")
+        setPlayerInfoStore("https://www.youtube.com/watch?v=5yx6BWlEVcY")
 
         render(<AudioPlayer />)
 
@@ -39,7 +39,7 @@ describe("audio player", () => {
     })
 
     it("should start audio player if any other url is provided", () => {
-        setSourceStoreToReturn("https://paulshields.dev/stream")
+        setPlayerInfoStore("https://paulshields.dev/stream")
 
         render(<AudioPlayer />)
 
@@ -47,7 +47,7 @@ describe("audio player", () => {
     })
 
     it("should not start any player if no url is provided", () => {
-        setSourceStoreToReturn("")
+        setPlayerInfoStore("")
 
         render(<AudioPlayer />)
 

@@ -1,19 +1,31 @@
 import { cleanup, render, screen, within } from "@testing-library/react"
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
+import { afterEach, beforeAll, describe, expect, it, Mock, vi } from "vitest"
 import { Playlist } from "./playlist"
 import userEvent from "@testing-library/user-event"
 import { BUTTON_ROLE, LIST_ITEM_ROLE, LIST_ROLE } from "../../test/element-roles"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
-import { useSetPlayerSource } from "../../stores/player-state"
+import { usePlayerSourceStore } from "../../stores/player-state"
 
 vi.mock("../../components/hoverable-button/hoverable-button")
 vi.mock("./playlist-list-item")
 vi.mock("../../stores/player-state")
 
+function setPlayerSourceStore(setPlayerSource: Mock) {
+    vi.mocked(usePlayerSourceStore).mockReturnValue({
+        source: {
+            name: "",
+            streamer: "",
+            sourceHomepage: "",
+            streamUrl: ""
+        },
+        setPlayerSource: setPlayerSource
+    })
+}
+
 describe("playlist", () => {
     beforeAll(() => {
-        vi.mocked(useSetPlayerSource).mockReturnValue(vi.fn())
+        setPlayerSourceStore(vi.fn())
         quickMockComponent(HoverableButton)
     })
 
@@ -51,9 +63,9 @@ describe("playlist", () => {
         expect(within(playlistList).getAllByRole(LIST_ITEM_ROLE).length).toBeGreaterThan(0)
     })
 
-    it("should send source to ...", async () => {
+    it("should send source to the global store", async () => {
         const setSourceFunction = vi.fn()
-        vi.mocked(useSetPlayerSource).mockReturnValue(setSourceFunction)
+        setPlayerSourceStore(setSourceFunction)
 
         render(<Playlist />)
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
