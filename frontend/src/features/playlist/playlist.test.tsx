@@ -28,7 +28,7 @@ describe("playlist", () => {
     it("should show playlist popup when button is clicked", async () => {
         render(<Playlist />)
 
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[0])
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/}))
 
         expect(screen.getByTestId("playlist-popup")).toBeVisible()
     })
@@ -36,8 +36,8 @@ describe("playlist", () => {
     it("should hide playlist popup when it is showing and the button is clicked", async () => {
         render(<Playlist />)
 
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[0])
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[0])
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
 
         expect(screen.getByTestId("playlist-popup")).not.toBeVisible()
     })
@@ -45,7 +45,7 @@ describe("playlist", () => {
     it("should populate playlist when popup is open", async () => {
         render(<Playlist />)
 
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[0])
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
 
         const playlistList = screen.getByRole(LIST_ROLE)
         expect(within(playlistList).getAllByRole(LIST_ITEM_ROLE).length).toBeGreaterThan(0)
@@ -56,8 +56,8 @@ describe("playlist", () => {
         vi.mocked(useSetPlayerSource).mockReturnValue(setSourceFunction)
 
         render(<Playlist />)
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[0])
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE)[1])
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
+        await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: /PlaylistListItem/ })[0])
 
         expect(setSourceFunction).toHaveBeenCalledOnce()
     })

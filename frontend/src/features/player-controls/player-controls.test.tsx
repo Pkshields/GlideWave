@@ -54,7 +54,7 @@ describe("player controls", () => {
         setPlayerSourceStore("", "", toggleIsPlayingFunction)
 
         render(<PlayerControls />)
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: "onClick" })[1])
+        await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: /HoverableButton/ })[1])
 
         expect(toggleIsPlayingFunction).toHaveBeenCalledOnce()
     })

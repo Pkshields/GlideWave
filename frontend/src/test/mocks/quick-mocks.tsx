@@ -11,14 +11,16 @@ export function quickMockComponent(mockedFunction: (props: any) => JSX.Element) 
         .mockImplementation((props: any) => (
             <>
                 <p>{mockedFunction.name}</p>
-                {generateMockComponentFromProps(props)}
+                {generateMockComponentFromProps(mockedFunction.name, props)}
             </>
         ))
 }
 
-function generateMockComponentFromProps(props: any) {
+function generateMockComponentFromProps(componentName: string, props: any) {
     const propsAsKeyValues = Object.entries(props)
-    const mappedProps = propsAsKeyValues.map(mapPropToButtonOrStringRepresentation)
+    const mappedProps = propsAsKeyValues.map((pair) =>
+        mapPropToButtonOrStringRepresentation(componentName, pair)
+    )
 
     const [buttons, textProps] = partition(mappedProps, (item) => React.isValidElement(item))
 
@@ -32,9 +34,9 @@ function generateMockComponentFromProps(props: any) {
     )
 }
 
-function mapPropToButtonOrStringRepresentation([key, value]: [string, any]) {
+function mapPropToButtonOrStringRepresentation(componentName: string, [key, value]: [string, any]) {
     if (isNoParamFunction(value)) {
-        return <button key={key} onClick={value}>{key}</button>
+        return <button key={key} onClick={value}>{componentName}::{key}</button>
     }
 
     return `${key}: ${value}`

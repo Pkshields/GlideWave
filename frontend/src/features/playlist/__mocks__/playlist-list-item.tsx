@@ -7,7 +7,7 @@ export function PlaylistListItem({ source, onClick }: PlaylistListItemProps) {
                 PlaylistListItem
                 source: {JSON.stringify(source)}
             </p>
-            <button onClick={() => onClick(source)}>onClick</button>
+            <button onClick={() => onClick(source)}>PlaylistListItem::onClick</button>
         </li>
     )
 }

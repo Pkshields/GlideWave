@@ -17,7 +17,7 @@ describe("quick mocks from supported components", () => {
     it("should include the name of the component in the mocked component text", () => {
         render(<QuickMocksComponent aString="" aBoolean={true} aFunction={vi.fn()} />)
 
-        expect(screen.getByText(/QuickMocksComponent/)).toBeInTheDocument()
+        expect(screen.getByText("QuickMocksComponent")).toBeInTheDocument()
     })
 
     it("should include all non-function props in the mocked component text", () => {
@@ -32,14 +32,14 @@ describe("quick mocks from supported components", () => {
     it("should include a button for all function props in the mocked component", () => {
         render(<QuickMocksComponent aString="" aBoolean={true} aFunction={vi.fn()} />)
 
-        expect(screen.getByRole(BUTTON_ROLE, { name: "aFunction" })).toBeInTheDocument()
+        expect(screen.getByRole(BUTTON_ROLE, { name: /aFunction/ })).toBeInTheDocument()
     })
 
     it("should call the function prop when the asspciated button is clicked", async () => {
         const aFunction = vi.fn()
 
         render(<QuickMocksComponent aString="" aBoolean={true} aFunction={aFunction} />)
-        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: "aFunction" }))
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /aFunction/ }))
 
         expect(aFunction).toHaveBeenCalledOnce()
     })
