@@ -1,4 +1,6 @@
-[
+import { StreamSource } from "../types/stream-source"
+
+export const DEFAULT_PLAYLIST: StreamSource[] = [
     {
         "name": "ChillHop",
         "streamer": "FluxFM",

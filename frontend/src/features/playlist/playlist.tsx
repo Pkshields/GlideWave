@@ -3,11 +3,9 @@ import { faFolder as faFolderSolid } from "@fortawesome/free-solid-svg-icons"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
 import { useState } from "react"
 import { StreamSource } from "../../types/stream-source"
-import untypedDefaultPlaylist from "../../config/default-playlist.json"
 import { useSetPlayerSource } from "../../stores/player-state"
 import { PlaylistListItem } from "./playlist-list-item"
-
-const defaultPlaylist: StreamSource[] = untypedDefaultPlaylist
+import { DEFAULT_PLAYLIST } from "../../config/constants"
 
 export function Playlist() {
     const setPlayerSource = useSetPlayerSource()
@@ -35,7 +33,7 @@ export function Playlist() {
                 data-testid="playlist-popup"
             >
                 <ul>
-                    {defaultPlaylist.map((element, index) => (
+                    {DEFAULT_PLAYLIST.map((element, index) => (
                         <PlaylistListItem
                             key={`playlist-list-item-${index}`}
                             source={element}
