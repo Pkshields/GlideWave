@@ -5,10 +5,13 @@ import { useShallow } from "zustand/react/shallow"
 import { DEFAULT_PLAYLIST } from "../config/constants"
 
 const useGlidewaveStore = create<GlidewaveState>((set) => ({
-    source: DEFAULT_PLAYLIST[0],
     isPlaying: false,
-    setPlayerSource: (source: StreamSource) => set(() => ({ source })),
-    toggleIsPlaying: () => set((state) => ({ isPlaying: !state.isPlaying }))
+    source: DEFAULT_PLAYLIST[0],
+    toggleIsPlaying: () => set((state) => ({ isPlaying: !state.isPlaying })),
+    setPlayerSource: (source: StreamSource) => set(() => ({
+        source,
+        isPlaying: true
+    })),
 }))
 
 export function usePlayerInfo() {
