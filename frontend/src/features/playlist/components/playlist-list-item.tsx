@@ -1,6 +1,6 @@
 import { faMusic, faPlay, faVolumeHigh } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { StreamSource } from "../../types/stream-source"
+import { StreamSource } from "../../../types/stream-source"
 
 export interface PlaylistListItemProps {
     source: StreamSource

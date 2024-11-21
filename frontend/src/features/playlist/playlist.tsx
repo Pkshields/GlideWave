@@ -1,47 +1,33 @@
 import { faFolder as faFolderRegular } from "@fortawesome/free-regular-svg-icons"
 import { faFolder as faFolderSolid } from "@fortawesome/free-solid-svg-icons"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
-import { useState } from "react"
-import { StreamSource } from "../../types/stream-source"
-import { usePlayerSourceStore } from "../../stores/player-state"
-import { PlaylistListItem } from "./playlist-list-item"
-import { DEFAULT_PLAYLIST } from "../../config/constants"
+import { useCallback, useRef, useState } from "react"
+import { PlaylistList } from "./components/playlist-list"
+import { useClickOutsideElement } from "../../hooks/use-click-outside-element"
 
 export function Playlist() {
-    const { source, setPlayerSource } = usePlayerSourceStore()
     const [playlistIsHidden, setPlaylistIsHidden] = useState(true)
+    const playlistRef = useRef<HTMLDivElement>(null)
+
+    const hidePlaylist = useCallback(() => {
+        setPlaylistIsHidden(true)
+    }, [setPlaylistIsHidden])
+    useClickOutsideElement(playlistRef, hidePlaylist, !playlistIsHidden)
 
     function togglePlaylist() {
         setPlaylistIsHidden(!playlistIsHidden)
     }
 
-    function streamSelected(source: StreamSource) {
-        setPlayerSource(source)
-    }
-
     return (
-        <div className="relative">
+        <div ref={playlistRef} className="relative">
             <HoverableButton
                 icon={faFolderRegular}
                 iconOnHover={faFolderSolid}
                 size="2x"
                 onClick={togglePlaylist}
             />
-            <div
-                className="absolute bottom-16 -left-6 w-72 h-96 p-2 bg-gray-800 rounded-xl overflow-y-scroll"
-                hidden={playlistIsHidden}
-                data-testid="playlist-popup"
-            >
-                <ul>
-                    {DEFAULT_PLAYLIST.map((element, index) => (
-                        <PlaylistListItem
-                            key={`playlist-list-item-${index}`}
-                            source={element}
-                            isPlaying={element === source}
-                            onClick={streamSelected}
-                        />
-                    ))}
-                </ul>
+            <div className="absolute bottom-16 -left-6" hidden={playlistIsHidden}>
+                <PlaylistList />
             </div>
         </div>
     )

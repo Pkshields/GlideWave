@@ -1,9 +1,9 @@
 import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { StreamSource } from "../../types/stream-source"
-import { LIST_ITEM_ROLE } from "../../test/element-roles"
 import userEvent from "@testing-library/user-event"
 import { PlaylistListItem } from "./playlist-list-item"
+import { StreamSource } from "../../../types/stream-source"
+import { LIST_ITEM_ROLE } from "../../../test/element-roles"
 
 const streamSource: StreamSource = {
     name: "Helluva Stream",

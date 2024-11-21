@@ -1,32 +1,19 @@
-import { cleanup, render, screen, within } from "@testing-library/react"
-import { afterEach, beforeAll, describe, expect, it, Mock, vi } from "vitest"
+import { cleanup, render, screen } from "@testing-library/react"
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest"
 import { Playlist } from "./playlist"
 import userEvent from "@testing-library/user-event"
-import { BUTTON_ROLE, LIST_ITEM_ROLE, LIST_ROLE } from "../../test/element-roles"
+import { BUTTON_ROLE } from "../../test/element-roles"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
-import { usePlayerSourceStore } from "../../stores/player-state"
+import { PlaylistList } from "./components/playlist-list"
 
 vi.mock("../../components/hoverable-button/hoverable-button")
-vi.mock("./playlist-list-item")
-vi.mock("../../stores/player-state")
-
-function setPlayerSourceStore(setPlayerSource: Mock) {
-    vi.mocked(usePlayerSourceStore).mockReturnValue({
-        source: {
-            name: "",
-            streamer: "",
-            sourceHomepage: "",
-            streamUrl: ""
-        },
-        setPlayerSource: setPlayerSource
-    })
-}
+vi.mock("./components/playlist-list")
 
 describe("playlist", () => {
     beforeAll(() => {
-        setPlayerSourceStore(vi.fn())
         quickMockComponent(HoverableButton)
+        quickMockComponent(PlaylistList)
     })
 
     afterEach(cleanup)
@@ -34,7 +21,7 @@ describe("playlist", () => {
     it("should be hidden by default", () => {
         render(<Playlist />)
 
-        expect(screen.getByTestId("playlist-popup")).not.toBeVisible()
+        expect(screen.getByText(/PlaylistList/)).not.toBeVisible()
     })
 
     it("should show playlist popup when button is clicked", async () => {
@@ -42,7 +29,7 @@ describe("playlist", () => {
 
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/}))
 
-        expect(screen.getByTestId("playlist-popup")).toBeVisible()
+        expect(screen.getByText(/PlaylistList/)).toBeVisible()
     })
 
     it("should hide playlist popup when it is showing and the button is clicked", async () => {
@@ -51,26 +38,27 @@ describe("playlist", () => {
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
 
-        expect(screen.getByTestId("playlist-popup")).not.toBeVisible()
+        expect(screen.getByText(/PlaylistList/)).not.toBeVisible()
     })
 
-    it("should populate playlist when popup is open", async () => {
+    it("should hide playlist popup when any element outside of the component is clicked", async () => {
+        render(<>
+            <Playlist />
+            <p data-testid="outside-component" />
+        </>)
+
+        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
+        await userEvent.click(screen.getByTestId("outside-component"))
+
+        expect(screen.getByText(/PlaylistList/)).not.toBeVisible()
+    })
+
+    it("should not hide playlist popup when the list itself is clicked", async () => {
         render(<Playlist />)
 
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
+        await userEvent.click(screen.getByText(/PlaylistList/))
 
-        const playlistList = screen.getByRole(LIST_ROLE)
-        expect(within(playlistList).getAllByRole(LIST_ITEM_ROLE).length).toBeGreaterThan(0)
-    })
-
-    it("should send source to the global store", async () => {
-        const setSourceFunction = vi.fn()
-        setPlayerSourceStore(setSourceFunction)
-
-        render(<Playlist />)
-        await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
-        await userEvent.click(screen.getAllByRole(BUTTON_ROLE, { name: /PlaylistListItem/ })[0])
-
-        expect(setSourceFunction).toHaveBeenCalledOnce()
+        expect(screen.getByText(/PlaylistList/)).toBeVisible()
     })
 })
