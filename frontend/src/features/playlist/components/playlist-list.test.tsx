@@ -1,23 +1,22 @@
 import { cleanup, render, screen, within } from "@testing-library/react"
 import { afterEach, beforeAll, describe, expect, it, Mock, vi } from "vitest"
 import userEvent from "@testing-library/user-event"
-import { usePlayerSourceStore } from "../../../stores/player-state"
 import { PlaylistList } from "./playlist-list"
 import { BUTTON_ROLE, LIST_ITEM_ROLE, LIST_ROLE } from "../../../test/element-roles"
+import { usePlayerStore } from "../../../stores/player-state"
 
 vi.mock("./playlist-list-item")
 vi.mock("../../../stores/player-state")
 
+const emptySource = {
+    name: "",
+    streamer: "",
+    sourceHomepage: "",
+    streamUrl: ""
+}
+
 function setPlayerSourceStore(setPlayerSource: Mock) {
-    vi.mocked(usePlayerSourceStore).mockReturnValue({
-        source: {
-            name: "",
-            streamer: "",
-            sourceHomepage: "",
-            streamUrl: ""
-        },
-        setPlayerSource: setPlayerSource
-    })
+    vi.mocked(usePlayerStore).mockReturnValue([emptySource, setPlayerSource])
 }
 
 describe("playlist list", () => {

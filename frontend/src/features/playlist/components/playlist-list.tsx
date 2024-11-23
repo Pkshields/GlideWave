@@ -1,10 +1,10 @@
-import { usePlayerSourceStore } from "../../../stores/player-state"
+import { usePlayerStore } from "../../../stores/player-state"
 import { StreamSource } from "../../../types/stream-source"
 import { DEFAULT_PLAYLIST } from "../../../config/constants"
 import { PlaylistListItem } from "./playlist-list-item"
 
 export function PlaylistList() {
-    const { source, setPlayerSource } = usePlayerSourceStore()
+    const [source, setPlayerSource] = usePlayerStore((s) => [s.source, s.setPlayerSource])
 
     function streamSelected(source: StreamSource) {
         setPlayerSource(source)

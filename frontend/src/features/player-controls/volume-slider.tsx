@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { repeat } from "../../utils/loops"
-import { usePlayerVolumeStore } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 
 export function VolumeSlider() {
-    const { volume, setVolume } = usePlayerVolumeStore()
+    const [volume, setVolume] = usePlayerStore(((s) => [s.volume, s.setVolume]))
     const [hoverOverNotch, setHoverOverNotch] = useState(-1)
 
     function indexFromVolume() {

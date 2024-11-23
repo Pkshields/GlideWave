@@ -4,23 +4,21 @@ import { AudioPlayer } from "./audio-player"
 import { YouTubePlayer } from "./components/youtube-player/youtube-player"
 import { AudioStreamPlayer } from "./components/audio-stream-player/audio-stream-player"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
-import { usePlayerInfo } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 
 vi.mock("./components/youtube-player/youtube-player")
 vi.mock("./components/audio-stream-player/audio-stream-player")
 vi.mock("../../stores/player-state")
 
-function setPlayerInfoStore(streamUrl: string) {
-    vi.mocked(usePlayerInfo).mockReturnValue({
-        source: {
-            name: "",
-            streamer: "",
-            sourceHomepage: "",
-            streamUrl: streamUrl
-        },
-        isPlaying: false,
-        volume: 1.0
-    })
+function setStreamUrl(streamUrl: string) {
+    const source = {
+        name: "",
+        streamer: "",
+        sourceHomepage: "",
+        streamUrl: streamUrl
+    }
+
+    vi.mocked(usePlayerStore).mockReturnValue([source, false, 1.0])
 }
 
 describe("audio player", () => {
@@ -32,7 +30,7 @@ describe("audio player", () => {
     afterEach(cleanup)
 
     it("should start youtube player if youtube url is provided", () => {
-        setPlayerInfoStore("https://www.youtube.com/watch?v=5yx6BWlEVcY")
+        setStreamUrl("https://www.youtube.com/watch?v=5yx6BWlEVcY")
 
         render(<AudioPlayer />)
 
@@ -40,7 +38,7 @@ describe("audio player", () => {
     })
 
     it("should start audio player if any other url is provided", () => {
-        setPlayerInfoStore("https://paulshields.dev/stream")
+        setStreamUrl("https://paulshields.dev/stream")
 
         render(<AudioPlayer />)
 
@@ -48,7 +46,7 @@ describe("audio player", () => {
     })
 
     it("should not start any player if no url is provided", () => {
-        setPlayerInfoStore("")
+        setStreamUrl("")
 
         render(<AudioPlayer />)
 

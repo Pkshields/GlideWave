@@ -2,11 +2,13 @@ import { faCirclePlay as faCirclePlayRegular, faCircleStop as faCircleStopRegula
 import { faCirclePlay as faCirclePlaySolid, faCircleStop as faCircleStopSolid } from "@fortawesome/free-solid-svg-icons"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
 import { VolumeSlider } from "./volume-slider"
-import { usePlayerInfoStore } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 import { Playlist } from "../playlist/playlist"
 
 export function PlayerControls() {
-    const { source, isPlaying, toggleIsPlaying } = usePlayerInfoStore()
+    const [source, isPlaying, toggleIsPlaying] = usePlayerStore(
+        (s) => [s.source, s.isPlaying, s.toggleIsPlaying]
+    )
 
     return (
         <div className="fixed bottom-0 left-0 w-full px-10 py-8 text-gray-100">

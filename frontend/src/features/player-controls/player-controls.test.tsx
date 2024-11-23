@@ -2,7 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { PlayerControls } from "./player-controls"
 import userEvent from "@testing-library/user-event"
-import { usePlayerInfoStore } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 import { quickMockComponent } from "../../test/mocks/quick-mocks"
 import { HoverableButton } from "../../components/hoverable-button/hoverable-button"
 import { BUTTON_ROLE } from "../../test/element-roles"
@@ -12,20 +12,15 @@ vi.mock("./volume-slider")
 vi.mock("../playlist/playlist")
 vi.mock("../../stores/player-state")
 
-function setPlayerInfoStore(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
-    vi.mocked(usePlayerInfoStore).mockReturnValue({
-        source: {
-            name: name,
-            streamer: streamer,
-            sourceHomepage: "",
-            streamUrl: ""
-        },
-        isPlaying: false,
-        volume: 1.0,
-        setPlayerSource: vi.fn(),
-        toggleIsPlaying: toggleIsPlaying,
-        setVolume: vi.fn()
-    })
+function mockPlayerStoreToReturn(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
+    const source = {
+        name: name,
+        streamer: streamer,
+        sourceHomepage: "",
+        streamUrl: ""
+    }
+
+    vi.mocked(usePlayerStore).mockReturnValue([source, false, toggleIsPlaying])
 }
 
 describe("player controls", () => {
@@ -37,7 +32,7 @@ describe("player controls", () => {
 
     it("should display the name of the stream source loaded into the player", () => {
         const name = "Chillhop"
-        setPlayerInfoStore(name, "")
+        mockPlayerStoreToReturn(name, "")
 
         render(<PlayerControls />)
 
@@ -46,7 +41,7 @@ describe("player controls", () => {
 
     it("should display the streamer of the stream source loaded into the player", () => {
         const streamer = "Big Mike"
-        setPlayerInfoStore("", streamer)
+        mockPlayerStoreToReturn("", streamer)
 
         render(<PlayerControls />)
 
@@ -55,7 +50,7 @@ describe("player controls", () => {
 
     it("should call play clicked when the play button is clicked", async () => {
         const toggleIsPlayingFunction = vi.fn()
-        setPlayerInfoStore("", "", toggleIsPlayingFunction)
+        mockPlayerStoreToReturn("", "", toggleIsPlayingFunction)
 
         render(<PlayerControls />)
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))

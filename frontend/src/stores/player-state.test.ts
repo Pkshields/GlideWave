@@ -1,20 +1,20 @@
 import { describe, expect, it, vi } from "vitest"
-import { usePlayerInfoStore, usePlayerVolumeStore } from "./player-state"
+import { usePlayerStore } from "./player-state"
 import { renderHook } from "@testing-library/react"
 import { StreamSource } from "../types/stream-source"
 
 vi.mock("zustand")
 
-describe("player info store", () => {
-    const expectedSource: StreamSource = {
-        name: "Stream Source",
-        streamer: "Streamer",
-        sourceHomepage: "https://home.page",
-        streamUrl: "https://home.page/stream.ogg"
-    }
+const expectedSource: StreamSource = {
+    name: "Stream Source",
+    streamer: "Streamer",
+    sourceHomepage: "https://home.page",
+    streamUrl: "https://home.page/stream.ogg"
+}
 
+describe("player source store", () => {
     it("should set stream source in store", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerInfoStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
 
         playerInfoHook.current.setPlayerSource(expectedSource)
         rerender()
@@ -23,7 +23,7 @@ describe("player info store", () => {
     })
 
     it("should toggle is playing to true when stream source is set", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerInfoStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
         expect(playerInfoHook.current.isPlaying).toBe(false)
 
         playerInfoHook.current.setPlayerSource(expectedSource)
@@ -31,9 +31,11 @@ describe("player info store", () => {
 
         expect(playerInfoHook.current.isPlaying).toBe(true)
     })
+})
 
+describe("player is playing store", () => {
     it("should toggle is playing state", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerInfoStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
         const initialIsPlaying = playerInfoHook.current.isPlaying
 
         playerInfoHook.current.toggleIsPlaying()
@@ -45,7 +47,7 @@ describe("player info store", () => {
 
 describe("player volume store", () => {
     it("should set volume level in store", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
 
         playerInfoHook.current.setVolume(0.2)
         rerender()
@@ -54,7 +56,7 @@ describe("player volume store", () => {
     })
 
     it("should set not allow the volume to go above 1", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
 
         playerInfoHook.current.setVolume(6)
         rerender()
@@ -63,7 +65,7 @@ describe("player volume store", () => {
     })
 
     it("should set not allow the volume to drop below 0", () => {
-        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerStore((s) => s))
 
         playerInfoHook.current.setVolume(-6)
         rerender()

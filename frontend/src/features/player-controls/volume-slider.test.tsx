@@ -2,19 +2,19 @@ import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest"
 import { VolumeSlider } from "./volume-slider"
 import { cleanup, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { usePlayerVolumeStore } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 
 vi.mock("../../stores/player-state")
 
-function mockUsePlayerVolumeStore(volume: number, setVolume: Mock) {
-    vi.mocked(usePlayerVolumeStore).mockReturnValue({ volume, setVolume })
+function mockVolumeStoreToReturn(volume: number, setVolume: Mock) {
+    vi.mocked(usePlayerStore).mockReturnValue([volume, setVolume])
 }
 
 describe("volume slider ui tests", () => {
     const setVolume = vi.fn()
 
     beforeEach(() => {
-        mockUsePlayerVolumeStore(1, setVolume)
+        mockVolumeStoreToReturn(1, setVolume)
     })
 
     afterEach(cleanup)
@@ -26,7 +26,7 @@ describe("volume slider ui tests", () => {
     })
 
     it("should have half the notches highlighted", () => {
-        mockUsePlayerVolumeStore(0.5, setVolume)
+        mockVolumeStoreToReturn(0.5, setVolume)
 
         const component = render(<VolumeSlider />)
 

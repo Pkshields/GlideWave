@@ -1,9 +1,9 @@
-import { usePlayerInfo } from "../../stores/player-state"
+import { usePlayerStore } from "../../stores/player-state"
 import { AudioStreamPlayer } from "./components/audio-stream-player/audio-stream-player"
 import { YouTubePlayer } from "./components/youtube-player/youtube-player"
 
 export function AudioPlayer() {
-    const { source, isPlaying, volume } = usePlayerInfo()
+    const [source, isPlaying, volume] = usePlayerStore((s) => [s.source, s.isPlaying, s.volume])
 
     if (source.streamUrl.includes("youtube.com/watch?v=")) {
         return <YouTubePlayer url={source.streamUrl} isPlaying={isPlaying} volume={volume} />
