@@ -1,9 +1,22 @@
-import { afterEach, describe, expect, it } from "vitest"
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest"
 import { VolumeSlider } from "./volume-slider"
 import { cleanup, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { usePlayerVolumeStore } from "../../stores/player-state"
+
+vi.mock("../../stores/player-state")
+
+function mockUsePlayerVolumeStore(volume: number, setVolume: Mock) {
+    vi.mocked(usePlayerVolumeStore).mockReturnValue({ volume, setVolume })
+}
 
 describe("volume slider ui tests", () => {
+    const setVolume = vi.fn()
+
+    beforeEach(() => {
+        mockUsePlayerVolumeStore(1, setVolume)
+    })
+
     afterEach(cleanup)
 
     it("should start with all notches highlighted", () => {
@@ -12,12 +25,20 @@ describe("volume slider ui tests", () => {
         expect(component.container).toMatchSnapshot()
     })
 
-    it("should show current volume level after volume is changed", async () => {
+    it("should have half the notches highlighted", () => {
+        mockUsePlayerVolumeStore(0.5, setVolume)
+
         const component = render(<VolumeSlider />)
+
+        expect(component.container).toMatchSnapshot()
+    })
+
+    it("should trigger volume change on click", async () => {
+        render(<VolumeSlider />)
 
         await userEvent.click(screen.getByTestId('volume-notch-5'))
 
-        expect(component.container).toMatchSnapshot()
+        expect(setVolume).toBeCalledWith(0.6)
     })
 
     it("should show potential volume if notch is highlighted", async () => {

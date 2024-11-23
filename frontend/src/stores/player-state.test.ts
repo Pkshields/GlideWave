@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest"
-import { usePlayerInfoStore } from "./player-state"
+import { usePlayerInfoStore, usePlayerVolumeStore } from "./player-state"
 import { renderHook } from "@testing-library/react"
 import { StreamSource } from "../types/stream-source"
 
@@ -40,5 +40,34 @@ describe("player info store", () => {
         rerender()
 
         expect(playerInfoHook.current.isPlaying).toBe(!initialIsPlaying)
+    })
+})
+
+describe("player volume store", () => {
+    it("should set volume level in store", () => {
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+
+        playerInfoHook.current.setVolume(0.2)
+        rerender()
+
+        expect(playerInfoHook.current.volume).toBe(0.2)
+    })
+
+    it("should set not allow the volume to go above 1", () => {
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+
+        playerInfoHook.current.setVolume(6)
+        rerender()
+
+        expect(playerInfoHook.current.volume).toBe(1)
+    })
+
+    it("should set not allow the volume to drop below 0", () => {
+        const { result: playerInfoHook, rerender } = renderHook(() => usePlayerVolumeStore())
+
+        playerInfoHook.current.setVolume(-6)
+        rerender()
+
+        expect(playerInfoHook.current.volume).toBe(0)
     })
 })

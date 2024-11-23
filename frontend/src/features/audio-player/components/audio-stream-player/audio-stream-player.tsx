@@ -3,17 +3,25 @@ import { useCallback, useEffect, useRef } from "react"
 export interface AudioStreamPlayerProps {
     url: string
     isPlaying: boolean
+    volume: number
 }
 
-export function AudioStreamPlayer({ url, isPlaying }: AudioStreamPlayerProps) {
+export function AudioStreamPlayer({ url, isPlaying, volume }: AudioStreamPlayerProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
 
     const play = useCallback(async () => {
-        if (audioRef.current) {
-            audioRef.current.src = url
-            await audioRef.current.play()
+        if (!audioRef.current) {
+            return
         }
-    }, [audioRef, url])
+
+        audioRef.current.volume = volume
+
+        if (audioRef.current.src != url) {
+            audioRef.current.src = url
+        }
+
+        await audioRef.current.play()
+    }, [audioRef, url, volume])
 
     function stop() {
         if (audioRef.current) {

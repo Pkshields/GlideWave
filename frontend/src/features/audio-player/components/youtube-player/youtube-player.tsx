@@ -4,9 +4,10 @@ import ReactPlayer from "react-player"
 export interface YouTubePlayerProps {
     url: string
     isPlaying: boolean
+    volume: number
 }
 
-export function YouTubePlayer({ url, isPlaying }: YouTubePlayerProps) {
+export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
     const playerRef = useRef<ReactPlayer>(null)
 
     useEffect(() => {
@@ -17,6 +18,13 @@ export function YouTubePlayer({ url, isPlaying }: YouTubePlayerProps) {
     }, [isPlaying])
 
     return (
-        <ReactPlayer ref={playerRef} url={url} playing={isPlaying} controls data-testid="react-player" />
+        <ReactPlayer
+            ref={playerRef}
+            url={url}
+            playing={isPlaying}
+            volume={volume}
+            controls
+            data-testid="react-player"
+        />
     )
 }

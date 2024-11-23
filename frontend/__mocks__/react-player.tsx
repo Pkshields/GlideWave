@@ -15,6 +15,7 @@ const ReactPlayer = React.forwardRef((props: ReactPlayerProps, ref) => {
         <>
             <p>URL: {props.url?.toString()}</p>
             <p>Playing: {props.playing?.toString()}</p>
+            <p>Volume: {props.volume?.toString()}</p>
         </>
     )
 })

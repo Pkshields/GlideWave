@@ -8,6 +8,7 @@ import { HoverableButton } from "../../components/hoverable-button/hoverable-but
 import { BUTTON_ROLE } from "../../test/element-roles"
 
 vi.mock("../../components/hoverable-button/hoverable-button")
+vi.mock("./volume-slider")
 vi.mock("../playlist/playlist")
 vi.mock("../../stores/player-state")
 
@@ -20,8 +21,10 @@ function setPlayerInfoStore(name: string, streamer: string, toggleIsPlaying = vi
             streamUrl: ""
         },
         isPlaying: false,
+        volume: 1.0,
         setPlayerSource: vi.fn(),
-        toggleIsPlaying: toggleIsPlaying
+        toggleIsPlaying: toggleIsPlaying,
+        setVolume: vi.fn()
     })
 }
 

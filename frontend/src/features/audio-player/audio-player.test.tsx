@@ -18,7 +18,8 @@ function setPlayerInfoStore(streamUrl: string) {
             sourceHomepage: "",
             streamUrl: streamUrl
         },
-        isPlaying: false
+        isPlaying: false,
+        volume: 1.0
     })
 }
 

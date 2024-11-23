@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`volume slider ui tests > should show current volume level after volume is changed 1`] = `
+exports[`volume slider ui tests > should have half the notches highlighted 1`] = `
 <div>
   <div
     class="flex space-x-0 items-center"
@@ -50,7 +50,7 @@ exports[`volume slider ui tests > should show current volume level after volume 
       data-testid="volume-notch-5"
     >
       <div
-        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75 bg-white"
+        class="py-3 px-1 mx-0.5 border-2 rounded border-white scale-75"
       />
     </div>
     <div
