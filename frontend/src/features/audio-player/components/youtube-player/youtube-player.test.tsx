@@ -1,13 +1,16 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react"
-import { afterEach, describe, expect, it, vi } from "vitest"
+import { cleanup, render, screen } from "@testing-library/react"
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest"
 import { YouTubePlayer } from "./youtube-player"
 import { mockGetDuration, mockSeekTo } from "../../../../../__mocks__/react-player"
-import { DIV_ROLE } from "../../../../test/element-roles"
+import { act } from "react"
 
 vi.mock('react-player')
 
 describe("youtube player", () => {
     const url = "https://www.videosite.com/"
+
+    beforeAll(() => vi.useFakeTimers())
+    afterAll(() => vi.useRealTimers())
 
     afterEach(() => {
         cleanup()
@@ -30,9 +33,6 @@ describe("youtube player", () => {
         mockGetDuration.mockResolvedValue(1)
 
         render(<YouTubePlayer url={url} isPlaying={true} volume={1} />)
-        await waitFor(() => {
-            expect(screen.getByRole(DIV_ROLE)).toBeInTheDocument()
-        })
 
         expect(mockSeekTo).toHaveBeenCalledOnce()
     })
@@ -43,5 +43,22 @@ describe("youtube player", () => {
         render(<YouTubePlayer url={url} isPlaying={true} volume={volume} />)
 
         expect(screen.getByText(`Volume: ${volume}`)).toBeInTheDocument()
+    })
+
+    it("should not toggle playing state immediately", () => {
+        const { rerender } = render(<YouTubePlayer url={url} isPlaying={true} volume={1} />)
+
+        rerender(<YouTubePlayer url={url} isPlaying={false} volume={1} />)
+
+        expect(screen.getByText("Playing: true")).toBeInTheDocument()
+    })
+
+    it("should toggle playing state after debounce timer finishes", () => {
+        const { rerender } = render(<YouTubePlayer url={url} isPlaying={true} volume={1} />)
+
+        rerender(<YouTubePlayer url={url} isPlaying={false} volume={1} />)
+        act(() => { vi.advanceTimersByTime(1000) })
+
+        expect(screen.getByText("Playing: false")).toBeInTheDocument()
     })
 })

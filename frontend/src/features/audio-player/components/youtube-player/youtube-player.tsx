@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import ReactPlayer from "react-player"
+import { useDebounce } from "../../../../hooks/use-debounce"
 
 export interface YouTubePlayerProps {
     url: string
@@ -9,6 +10,7 @@ export interface YouTubePlayerProps {
 
 export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
     const playerRef = useRef<ReactPlayer>(null)
+    const debouncedIsPlaying = useDebounce(isPlaying, 150)
 
     useEffect(() => {
         if (isPlaying) {
@@ -21,7 +23,7 @@ export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
         <ReactPlayer
             ref={playerRef}
             url={url}
-            playing={isPlaying}
+            playing={debouncedIsPlaying}
             volume={volume}
             controls
             data-testid="react-player"
