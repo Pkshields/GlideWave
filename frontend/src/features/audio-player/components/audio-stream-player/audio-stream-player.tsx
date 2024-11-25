@@ -40,6 +40,6 @@ export function AudioStreamPlayer({ url, isPlaying, volume }: AudioStreamPlayerP
     }, [url, isPlaying, play])
 
     return (
-        <audio data-testid="audio-player" ref={audioRef}></audio>
+        <audio ref={audioRef} data-testid="audio-player"></audio>
     )
 }

@@ -31,11 +31,11 @@ export function VolumeSlider() {
                 repeat(index => (
                     <div
                         key={index}
-                        data-testid={`volume-notch-${index}`}
                         className="cursor-pointer"
                         onMouseEnter={() => setHoverOverNotch(index)}
                         onMouseLeave={() => setHoverOverNotch(-1)}
                         onClick={() => setVolumeFromIndex(index)}
+                        data-testid={`volume-notch-${index}`}
                     >
                         <div className={generateSliderNotchStyleClasses(index)} />
                     </div>

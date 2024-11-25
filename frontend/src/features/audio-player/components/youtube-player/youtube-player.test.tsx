@@ -29,7 +29,7 @@ describe("youtube player", () => {
         expect(screen.getByText(`URL: ${url}`)).toBeInTheDocument()
     })
 
-    it("should set the video to live", async () => {
+    it("should set the video to live", () => {
         mockGetDuration.mockResolvedValue(1)
 
         render(<YouTubePlayer url={url} isPlaying={true} volume={1} />)
