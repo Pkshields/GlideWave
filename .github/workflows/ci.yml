@@ -53,6 +53,8 @@ jobs:
             | jq -r ".result[].id" \
             | tr \\n " "))
 
+          echo ">> Deleting $((${#DEPLOYMENT_IDS[@]} - 1)) deployment(s)..."
+
           for ((i=2; i <= ${#DEPLOYMENT_IDS[@]}; i++)); do
               echo ">> Deleting old deployment of ID ${DEPLOYMENT_IDS[$i]}"
               curl --request DELETE \
