@@ -39,3 +39,24 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ${{ env.WORKING_DIRECTORY }}/dist --project-name=glidewave
+
+      - name: Delete old deployments
+        if: github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          echo ">> Querying Cloudflare Pages for list of deployments"
+          DEPLOYMENT_IDS=($(curl https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/glidewave/deployments \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            | jq -r ".result[].id" \
+            | tr \\n " "))
+
+          for ((i=2; i <= ${#DEPLOYMENT_IDS[@]}; i++)); do
+              echo ">> Deleting old deployment of ID ${DEPLOYMENT_IDS[$i]}"
+              curl --request DELETE \
+                --url https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/glidewave/deployments/${DEPLOYMENT_IDS[$i]} \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+          done
