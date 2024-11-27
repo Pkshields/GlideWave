@@ -26,6 +26,7 @@ export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
             playing={debouncedIsPlaying}
             volume={volume}
             controls
+            className="absolute -z-50"
             data-testid="react-player"
         />
     )
