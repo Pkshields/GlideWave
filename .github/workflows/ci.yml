@@ -48,6 +48,7 @@ jobs:
         run: |
           echo ">> Querying Cloudflare Pages for list of deployments"
           DEPLOYMENT_IDS=($(curl https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/glidewave/deployments \
+            --fail-with-body \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
             | jq -r ".result[].id" \
@@ -55,10 +56,11 @@ jobs:
 
           echo ">> Deleting $((${#DEPLOYMENT_IDS[@]} - 1)) deployment(s)..."
 
-          for ((i=2; i <= ${#DEPLOYMENT_IDS[@]}; i++)); do
+          for ((i=1; i < ${#DEPLOYMENT_IDS[@]}; i++)); do
               echo ">> Deleting old deployment of ID ${DEPLOYMENT_IDS[$i]}"
               curl --request DELETE \
                 --url https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/glidewave/deployments/${DEPLOYMENT_IDS[$i]} \
+                --fail-with-body \
                 -H "Content-Type: application/json" \
                 -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
           done
