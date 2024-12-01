@@ -11,7 +11,10 @@ export function PlayerControls() {
     )
 
     return (
-        <div className="fixed bottom-0 left-0 w-full px-10 py-8 text-gray-100">
+        <div className="fixed bottom-0 left-0 w-full
+                        px-10 py-8
+                        text-gray-100
+                        bg-gradient-to-t from-gray-800/50 to-gray-800/0">
             <div className="flex space-x-14 items-center">
                 <Playlist />
                 <div>
