@@ -17,9 +17,9 @@ export function PlayerControls() {
                         bg-gradient-to-t from-gray-800/50 to-gray-800/0">
             <div className="flex space-x-14 items-center">
                 <Playlist />
-                <div>
-                    <p className="text-lg pb-3">{source.name}</p>
-                    <p className="text-gray-300">{source.streamer}</p>
+                <div className="w-52 whitespace-nowrap">
+                    <p className="pb-3 text-lg overflow-hidden text-ellipsis">{source.name}</p>
+                    <p className="text-gray-300 overflow-hidden text-ellipsis">{source.streamer}</p>
                 </div>
                 <HoverableButton
                     icon={isPlaying ? faCircleStopRegular : faCirclePlayRegular}
