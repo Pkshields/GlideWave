@@ -4,7 +4,7 @@ import { BackgroundVideo } from "./features/background-video/background-video"
 
 function App() {
     return (
-        <div className="bg-sky-700 h-screen w-screen">
+        <div className="h-screen w-screen">
             <BackgroundVideo />
             <PlayerControls />
             <AudioPlayer />
