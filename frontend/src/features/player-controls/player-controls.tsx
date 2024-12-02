@@ -6,8 +6,8 @@ import { usePlayerStore } from "../../stores/player-state"
 import { Playlist } from "../playlist/playlist"
 
 export function PlayerControls() {
-    const [source, isPlaying, toggleIsPlaying] = usePlayerStore(
-        (s) => [s.source, s.isPlaying, s.toggleIsPlaying]
+    const [source, isPlaying, isBuffering, toggleIsPlaying] = usePlayerStore(
+        (s) => [s.source, s.isPlaying, s.isBuffering, s.toggleIsPlaying]
     )
 
     return (
@@ -26,6 +26,7 @@ export function PlayerControls() {
                     iconOnHover={isPlaying ? faCircleStopSolid : faCirclePlaySolid}
                     size="2x"
                     onClick={toggleIsPlaying}
+                    fadeAnimation={isBuffering}
                 />
                 <VolumeSlider />
             </div>

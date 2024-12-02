@@ -12,7 +12,7 @@ vi.mock("./volume-slider")
 vi.mock("../playlist/playlist")
 vi.mock("../../stores/player-state")
 
-function mockPlayerStoreToReturn(name: string, streamer: string, toggleIsPlaying = vi.fn()) {
+function mockPlayerStoreToReturn(name: string, streamer: string, isBuffering: boolean, toggleIsPlaying = vi.fn()) {
     const source = {
         name: name,
         streamer: streamer,
@@ -20,7 +20,7 @@ function mockPlayerStoreToReturn(name: string, streamer: string, toggleIsPlaying
         streamUrl: ""
     }
 
-    vi.mocked(usePlayerStore).mockReturnValue([source, false, toggleIsPlaying])
+    vi.mocked(usePlayerStore).mockReturnValue([source, false, isBuffering, toggleIsPlaying])
 }
 
 describe("player controls", () => {
@@ -32,7 +32,7 @@ describe("player controls", () => {
 
     it("should display the name of the stream source loaded into the player", () => {
         const name = "Chillhop"
-        mockPlayerStoreToReturn(name, "")
+        mockPlayerStoreToReturn(name, "", false)
 
         render(<PlayerControls />)
 
@@ -41,7 +41,7 @@ describe("player controls", () => {
 
     it("should display the streamer of the stream source loaded into the player", () => {
         const streamer = "Big Mike"
-        mockPlayerStoreToReturn("", streamer)
+        mockPlayerStoreToReturn("", streamer, false)
 
         render(<PlayerControls />)
 
@@ -50,11 +50,19 @@ describe("player controls", () => {
 
     it("should call play clicked when the play button is clicked", async () => {
         const toggleIsPlayingFunction = vi.fn()
-        mockPlayerStoreToReturn("", "", toggleIsPlayingFunction)
+        mockPlayerStoreToReturn("", "", false, toggleIsPlayingFunction)
 
         render(<PlayerControls />)
         await userEvent.click(screen.getByRole(BUTTON_ROLE, { name: /HoverableButton/ }))
 
         expect(toggleIsPlayingFunction).toHaveBeenCalledOnce()
+    })
+
+    it.each([true, false])("should fade animate if buffering", (isBuffering: boolean) => {
+        mockPlayerStoreToReturn("", "", isBuffering)
+
+        render(<PlayerControls />)
+
+        expect(screen.getByText(new RegExp(`fadeAnimation: ${isBuffering}`))).toBeInTheDocument()
     })
 })

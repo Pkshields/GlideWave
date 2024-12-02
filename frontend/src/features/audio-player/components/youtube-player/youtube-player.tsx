@@ -6,9 +6,13 @@ export interface YouTubePlayerProps {
     url: string
     isPlaying: boolean
     volume: number
+    onBuffering: () => void
+    onBufferingFinished: () => void
 }
 
-export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
+export function YouTubePlayer(
+    { url, isPlaying, volume, onBuffering, onBufferingFinished }: YouTubePlayerProps
+) {
     const playerRef = useRef<ReactPlayer>(null)
     const debouncedIsPlaying = useDebounce(isPlaying, 150)
 
@@ -25,6 +29,8 @@ export function YouTubePlayer({ url, isPlaying, volume }: YouTubePlayerProps) {
             url={url}
             playing={debouncedIsPlaying}
             volume={volume}
+            onBuffer={onBuffering}
+            onBufferEnd={onBufferingFinished}
             controls
             className="absolute -z-50"
             data-testid="react-player"

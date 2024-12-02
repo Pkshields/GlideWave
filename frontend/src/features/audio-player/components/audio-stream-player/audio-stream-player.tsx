@@ -4,9 +4,13 @@ export interface AudioStreamPlayerProps {
     url: string
     isPlaying: boolean
     volume: number
+    onBuffering: () => void
+    onBufferingFinished: () => void
 }
 
-export function AudioStreamPlayer({ url, isPlaying, volume }: AudioStreamPlayerProps) {
+export function AudioStreamPlayer(
+    { url, isPlaying, volume, onBuffering, onBufferingFinished }: AudioStreamPlayerProps
+) {
     const audioRef = useRef<HTMLAudioElement>(null)
 
     const play = useCallback(async () => {
@@ -40,6 +44,12 @@ export function AudioStreamPlayer({ url, isPlaying, volume }: AudioStreamPlayerP
     }, [url, isPlaying, play])
 
     return (
-        <audio ref={audioRef} className="absolute -z-50" data-testid="audio-player"></audio>
+        <audio
+            ref={audioRef}
+            className="absolute -z-50"
+            onWaiting={onBuffering}
+            onCanPlayThrough={onBufferingFinished}
+            data-testid="audio-player"
+        ></audio>
     )
 }
