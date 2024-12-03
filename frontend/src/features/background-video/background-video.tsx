@@ -16,6 +16,7 @@ export function BackgroundVideo() {
                 data-testid="backgroundVideo"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
+                hidden={!isPlaying}
             >
                 <source src={fallbackBackground} type="video/mp4" />
             </video>
