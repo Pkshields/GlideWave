@@ -1,4 +1,5 @@
 import { usePlayerStore } from "../../stores/player-state"
+import { urlIsAudioStream, urlIsYouTubeStream } from "../../utils/video/url-categorizer"
 import { AudioStreamPlayer } from "./components/audio-stream-player/audio-stream-player"
 import { YouTubePlayer } from "./components/youtube-player/youtube-player"
 
@@ -7,7 +8,7 @@ export function AudioPlayer() {
         (s) => [s.source, s.isPlaying, s.volume, s.setIsBuffering]
     )
 
-    if (source.streamUrl.includes("youtube.com/watch?v=")) {
+    if (urlIsYouTubeStream(source.streamUrl)) {
         return <YouTubePlayer
             url={source.streamUrl}
             isPlaying={isPlaying}
@@ -15,7 +16,7 @@ export function AudioPlayer() {
             onBuffering={() => setIsBuffering(true)}
             onBufferingFinished={() => setIsBuffering(false)}
         />
-    } else if (source.streamUrl) {
+    } else if (urlIsAudioStream(source.streamUrl)) {
         return <AudioStreamPlayer
             url={source.streamUrl}
             isPlaying={isPlaying}

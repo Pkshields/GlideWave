@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react"
 import { vi } from "vitest"
-import { partition } from "../../utils/collections"
+import { partition } from "../../utils/common/collections"
 
 export function quickMockComponent(mockedFunction: (props: any) => JSX.Element) {
     vi.mocked(mockedFunction)

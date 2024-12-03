@@ -1,6 +1,8 @@
 import { faMusic, faPlay, faVolumeHigh } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { StreamSource } from "../../../types/stream-source"
+import { urlIsYouTubeStream } from "../../../utils/video/url-categorizer"
+import { faYoutube } from "@fortawesome/free-brands-svg-icons"
 
 export interface PlaylistListItemProps {
     source: StreamSource
@@ -9,7 +11,9 @@ export interface PlaylistListItemProps {
 }
 
 export function PlaylistListItem({ source, isPlaying, onClick }: PlaylistListItemProps) {
-    const icon = isPlaying ? faVolumeHigh : faMusic
+    const icon = isPlaying
+        ? faVolumeHigh
+        : (urlIsYouTubeStream(source.streamUrl) ? faYoutube : faMusic)
 
     return (
         <li

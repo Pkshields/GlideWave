@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { StreamSource } from "../types/stream-source"
 import { useShallow } from "zustand/react/shallow"
 import { DEFAULT_PLAYLIST } from "../config/constants"
-import { clamp } from "../utils/maths"
+import { clamp } from "../utils/common/maths"
 
 export interface GlidewaveState {
     isPlaying: boolean

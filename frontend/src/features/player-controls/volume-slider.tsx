@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { repeat } from "../../utils/loops"
 import { usePlayerStore } from "../../stores/player-state"
+import { repeat } from "../../utils/common/loops"
 
 export function VolumeSlider() {
     const [volume, setVolume] = usePlayerStore(((s) => [s.volume, s.setVolume]))
