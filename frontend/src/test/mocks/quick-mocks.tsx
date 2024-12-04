@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react"
 import { vi } from "vitest"
 import { partition } from "../../utils/common/collections"
 
@@ -18,11 +17,9 @@ export function quickMockComponent(mockedFunction: (props: any) => JSX.Element) 
 
 function generateMockComponentFromProps(componentName: string, props: any) {
     const propsAsKeyValues = Object.entries(props)
-    const mappedProps = propsAsKeyValues.map((pair) =>
-        mapPropToButtonOrStringRepresentation(componentName, pair)
-    )
-
-    const [buttons, textProps] = partition(mappedProps, (item) => React.isValidElement(item))
+    const [buttonPropPairs, textPropPairs] = partition(propsAsKeyValues, ([, value]) => isNoParamFunction(value))
+    const buttons = buttonPropPairs.map((pair) => propToButton(componentName, pair))
+    const textProps = textPropPairs.map(propToStringRepresentation)
 
     return (
         <>
@@ -34,14 +31,6 @@ function generateMockComponentFromProps(componentName: string, props: any) {
     )
 }
 
-function mapPropToButtonOrStringRepresentation(componentName: string, [key, value]: [string, any]) {
-    if (isNoParamFunction(value)) {
-        return <button key={key} onClick={value}>{componentName}::{key}</button>
-    }
-
-    return `${key}: ${value}`
-}
-
 function isNoParamFunction(func: any) {
     if (typeof func !== 'function') return false
 
@@ -50,4 +39,12 @@ function isNoParamFunction(func: any) {
     }
 
     return true
+}
+
+function propToButton(componentName: string, [key, value]: [string, any]) {
+    return <button key={key} onClick={value}>{componentName}::{key}</button>
+}
+
+function propToStringRepresentation([key, value]: [string, any]) {
+    return `${key}: ${value}`
 }
