@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react"
+import { useFetchStreams } from "../../api/use-fetch-streams"
 
 export interface AudioStreamPlayerProps {
     url: string
@@ -9,9 +10,10 @@ export interface AudioStreamPlayerProps {
 }
 
 export function AudioStreamPlayer(
-    { url, isPlaying, volume, onBuffering, onBufferingFinished }: AudioStreamPlayerProps
+    { url: initialUrl, isPlaying, volume, onBuffering, onBufferingFinished }: AudioStreamPlayerProps
 ) {
     const audioRef = useRef<HTMLAudioElement>(null)
+    const { isPending, data: streamUrls } = useFetchStreams(initialUrl)
 
     const play = useCallback(async () => {
         if (!audioRef.current) {
@@ -20,12 +22,12 @@ export function AudioStreamPlayer(
 
         audioRef.current.volume = volume
 
-        if (audioRef.current.src != url) {
-            audioRef.current.src = url
+        if (audioRef.current.src != streamUrls?.[0]) {
+            audioRef.current.src = streamUrls?.[0] ?? ""
         }
 
         await audioRef.current.play()
-    }, [audioRef, url, volume])
+    }, [streamUrls, volume])
 
     function stop() {
         if (audioRef.current) {
@@ -36,12 +38,12 @@ export function AudioStreamPlayer(
     }
 
     useEffect(() => {
-        if (isPlaying) {
-            play().catch(console.error)
-        } else {
+        if (!isPlaying || isPending) {
             stop()
+        } else {
+            play().catch(console.error)
         }
-    }, [url, isPlaying, play])
+    }, [isPlaying, play, isPending])
 
     return (
         <audio
