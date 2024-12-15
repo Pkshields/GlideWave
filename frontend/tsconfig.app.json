@@ -25,7 +25,6 @@
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/test",
-    "**/__mocks__",
-    "vitest.setup.ts"
+    "src/**/__mocks__",
   ],
 }
